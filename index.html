@@ -98,6 +98,8 @@
         </ul>
         <div class="footer">
             Todo: <span id="todo-count">1</span> • Done: <span id="completed-count">0</span> • Total: <span id="total-count">1</span>
+
+            <a href="#" id="clean-up">Clean up</a>
         </div>
     </div>
 
@@ -168,6 +170,14 @@
             $("#new-todo").val(null);
             updateCounters();
         }
+
+        function cleanUpDoneTodos(event) {
+            event.preventDefault();
+            $.when($(".completed").remove())
+                .then(updateCounters);
+        }
+
+        $("#clean-up").bind('click', cleanUpDoneTodos);
 
         updateCounters();
     </script>
