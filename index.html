@@ -102,17 +102,30 @@
   </div>
 
   <script>
-    function toggleDone() {
-    var checkbox = this;
+      function toggleDone() {
+      var checkbox = this;
 
-    $(checkbox).parent().toggleClass("completed");
+      $(checkbox).parent().toggleClass("completed");
+
+      updateCounters();
+    }
+      $(document).ready(function() {
+        $("input[type=checkbox]").bind('change', toggleDone);
+        updateCounters();
+      });
+
+       $("#total-count").html($(".todo").length);
+
+       function updateCounters() {
+      var ntodos = $(".todo").length;
+      var ncompleted = $(".completed").length
+
+      $("#total-count").html(ntodos);
+      $("#completed-count").html(ncompleted);
+      $("#todo-count").html(ntodos - ncompleted);
+    }
 
     updateCounters();
-  }
-
-  $("input[type=checkbox]").bind('change', toggleDone);
-
-   $("#total-count").html($(".todo").length);
   </script>
 </body>
 </html>
